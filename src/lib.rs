@@ -49,6 +49,9 @@ pub struct BootInformation {
     offset: usize,
 }
 
+unsafe impl Send for BootInformation {}
+unsafe impl Sync for BootInformation {}
+
 #[repr(C, packed)]
 struct BootInformationInner {
     total_size: u32,
