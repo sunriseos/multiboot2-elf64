@@ -38,6 +38,10 @@ impl MemoryArea {
         (self.base_addr + self.length)
     }
 
+    pub fn memory_type(&self) -> u32 {
+        self.typ
+    }
+
     pub fn size(&self) -> u64 {
         self.length
     }
@@ -58,9 +62,7 @@ impl Iterator for MemoryAreaIter {
         } else {
             let area = unsafe{&*(self.current_area as *const MemoryArea)};
             self.current_area = self.current_area + (self.entry_size as u64);
-            if area.typ == 1 {
-                Some(area)
-            } else {self.next()}
+            Some(area)
         }
     }
 }
